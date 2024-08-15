@@ -32,7 +32,7 @@ public class FirstBatch {
 
     @Bean
     public Job firstJob(){
-        System.out.println();
+        System.out.println("first job");
 
         return new JobBuilder("firstJob", jobRepository)
                 .start(firstStep())
@@ -53,6 +53,7 @@ public class FirstBatch {
 
     @Bean
     public RepositoryItemReader<BeforeEntity> beforeReader(){
+        System.out.println("first read");
         return new RepositoryItemReaderBuilder<BeforeEntity>()
                 .name("beforeReader")
                 .pageSize(10)
@@ -64,6 +65,7 @@ public class FirstBatch {
 
     @Bean
     public ItemProcessor<BeforeEntity, AfterEntity> middleProcessor(){
+        System.out.println("first process");
         return new ItemProcessor<BeforeEntity, AfterEntity>() {
             @Override
             public AfterEntity process(BeforeEntity item) throws Exception {
@@ -77,6 +79,7 @@ public class FirstBatch {
 
     @Bean
     public RepositoryItemWriter<AfterEntity> afterWriter(){
+        System.out.println("first write");
         return new RepositoryItemWriterBuilder<AfterEntity>()
                 .repository(afterRepository)
                 .methodName("save")
